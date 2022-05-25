@@ -44,12 +44,12 @@ require('nvim_comment').setup {
   comment_empty = false
 }
 
--- require('nvim-treesitter.configs').setup{
---   ensure_installed = {"cpp", "glsl"},
---   highlight = {
---     enable = true
---   }
--- }
+require('nvim-treesitter.configs').setup{
+  -- ensure_installed = {"cpp", "glsl"},
+  highlight = {
+    enable = true
+  }
+}
 
 -- plugin config end
 

@@ -5,5 +5,5 @@
   "sumneko-lua.enableNvimLuaDev": true,
   "powershell.integratedConsole.showOnStartup": false,
   "semanticTokens.filetypes": ["*"],
-  "semanticTokens.highlightPriority": 2048
+  "semanticTokens.highlightPriority": -2048
 }
