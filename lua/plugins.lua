@@ -97,4 +97,8 @@ return require('packer').startup(function()
 
   use {"tikhomirov/vim-glsl"}
 
+  use "nvim-treesitter/playground"
+
+  use "mhinz/vim-startify"
+
 end)
