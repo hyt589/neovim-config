@@ -82,7 +82,9 @@ require "nvim-treesitter.configs".setup {
 
 -- plugin config end
 
-vim.g.neoterm_shell = 'powershell.exe'
+if vim.fn.has('win32') or vim.fn.has('win64') then
+  vim.g.neoterm_shell = 'powershell.exe'
+end
 vim.g.neoterm_default_mod = 'botright'
 vim.g.neoterm_autoinsert = 1
 vim.g.neoterm_size = 15
@@ -130,6 +132,7 @@ local space_keymap = {
 }
 local commands = {
   cmake = {
+    -- this only works on windows if using msvc build tools
     generateCompileCommands = [[ cmake -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_MAKE_PROGRAM=nmake -S . -B compile_db_temp -G "Unix Makefiles" && copy compile_db_temp\compile_commands.json . && @RD /S /Q compile_db_temp ]]
   }
 }
@@ -176,3 +179,14 @@ vim.opt.mouse = 'a'
 
 vim.cmd [[ autocmd! BufNewFile,BufRead *.vert,*.frag set ft=glslx ]]
 
+if vim.g.neovide then
+  vim.opt.guifont = "FiraCode NF:h11"
+  local function toggle_fullscreen()
+    if vim.g.neovide_fullscreen then
+      vim.cmd [[let g:neovide_fullscreen = v:false]]
+    else
+      vim.cmd [[let g:neovide_fullscreen = v:true]]
+    end
+  end
+  vim.keymap.set("", "<F11>", toggle_fullscreen)
+end
