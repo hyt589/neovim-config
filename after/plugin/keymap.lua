@@ -40,10 +40,12 @@ local space_keymap = {
   },
 }
 local commands = {
-  cmake = {
-    -- this only works on windows if using msvc build tools
-    generateCompileCommands = [[ cmake -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_MAKE_PROGRAM=nmake -S . -B compile_db_temp -G "Unix Makefiles" && copy compile_db_temp\compile_commands.json . && @RD /S /Q compile_db_temp ]]
-  }
+    win = {
+      cmake = {
+        -- this only works on windows if using msvc build tools
+        generateCompileCommands = [[ cmake -DCMAKE_TRY_COMPILE_TARGET_TYPE="STATIC_LIBRARY" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_MAKE_PROGRAM=nmake -S . -B compile_db_temp -G "Unix Makefiles" && copy compile_db_temp\compile_commands.json . && @RD /S /Q compile_db_temp ]]
+      }
+    }
 }
 local backslash_keymap = {
   t = {'<cmd>Ttoggle<cr>', 'Toggle the neoterm window'},
@@ -60,7 +62,7 @@ local backslash_keymap = {
   ['9'] = {'<cmd>buffer 9<cr>', 'open buffer 9'},
   c = {
     name = '+cmake options',
-    c = {'<cmd>!' .. commands.cmake.generateCompileCommands .. '<cr>', 'generate compile_commands.json'},
+    c = {'<cmd>!' .. commands.win.cmake.generateCompileCommands .. '<cr>', 'generate compile_commands.json'},
     b = {'<cmd>!cmake -S . -B build && cmake --build build --config Release<cr>', 'build cmake project'}
   },
   o = {'<cmd>CocCommand clangd.switchSourceHeader<cr>', 'switch header source cpp'},
@@ -74,3 +76,5 @@ vim.cmd [[ nnoremap <silent>Q <cmd>qa<cr> ]]
 vim.cmd [[ nnoremap <silent><c-s> <cmd>wa<cr> ]]
 vim.cmd [[ nmap <c-_> gcc]] -- comment line
 vim.cmd [[ vmap <c-_> gc]] -- comment block
+vim.cmd [[ vnoremap < <gv ]]
+vim.cmd [[ vnoremap > >gv ]]

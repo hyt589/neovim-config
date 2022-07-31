@@ -7,15 +7,17 @@ vim.g.neoterm_size = 15
 
 vim.cmd [[ colorscheme onedark]]
 
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 2
+vim.opt.smartindent = true
 vim.opt.expandtab = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
 vim.opt.mouse = 'a'
+vim.wo.wrap = false
 
 vim.cmd [[ autocmd! BufNewFile,BufRead *.vert,*.frag set ft=glslx ]]
 
