@@ -1,116 +1,70 @@
-vim.cmd [[packadd packer.nvim]]
+-- load plugins
+require('packer.plugins')
 
-local info = debug.getinfo(1, 'S')
-local thisFile = string.sub(info.source, 2)
+-- plugin config start
+require('coc.config')
 
-vim.api.nvim_create_user_command(
-  'NvimPluginConfig',
-  'e ' .. thisFile,
-  {bang = true}
-)
-
-return require('packer').startup(function()
-
- use {
-    "ahmedkhalf/project.nvim",
-    config = function()
-      require("project_nvim").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-        patterns = { ".git", "Makefile", "package.json", "CMakeLists.txt" },
-      }
-    end
-  } 
-
-	use 'wbthomason/packer.nvim'
-
-	use {'neoclide/coc.nvim', branch = 'release'}
-
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' }
-  }
-
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
-
-  use 'liuchengxu/vim-which-key'
-  use {
-    'AckslD/nvim-whichkey-setup.lua',
-    requires = {'liuchengxu/vim-which-key'},
-  }
-
-  use{
-   'sonph/onehalf',
-   rtp = 'vim',
-   config = function()
-     -- vim.cmd 'colorscheme onehalfdark'
-   end
-  }
-
-  use {'kassio/neoterm'}
-
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+require('onedark').setup {
+    style = 'darker',
+    toggle_style_key = ' ts',
+    code_style = {
+      functions = 'none',
+      keywords = 'none',
+      comments = 'none'
     },
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    highlights = {
+      TSField = {fg = '$red'},
+      TSProperty = {fg = '$red'},
+      TSVariable = {fg = '#fdff94'},
+      TSParameter = {fg = '#3ae0a6'},
+    }
+-- vim.cmd [[highlight cppTSField guifg=#de4747]]
+-- vim.cmd [[highlight cppTSProperty guifg=#de4747]]
+}
+require('onedark').load()
+
+require('nvim-tree').setup {
+  view = { width = 50}
+}
+
+require('lualine').setup {
+  options = {
+    theme = 'onedark'
+  },
+}
+
+require('nvim_comment').setup {
+  comment_empty = false
+}
+
+require('nvim-treesitter.configs').setup{
+  -- ensure_installed = {"cpp", "glsl"},
+  highlight = {
+    enable = true
   }
+}
 
-  use {
-    'kdheepak/tabline.nvim',
-    config = function()
-      require'tabline'.setup {
-        -- Defaults configuration options
-        enable = true,
-        options = {
-        -- If lualine is installed tabline will use separators configured in lualine by default.
-        -- These options can be used to override those settings.
-          section_separators = {'', ''},
-          component_separators = {'', ''},
-          max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
-          show_tabs_always = false, -- this shows tabs only when there are more than one tab or if the first tab is named
-          show_devicons = true, -- this shows devicons in buffer section
-          show_bufnr = true, -- this appends [bufnr] to buffer section,
-          show_filename_only = false, -- shows base filename only instead of relative path in filename
-          modified_icon = "+ ", -- change the default modified icon
-          modified_italic = false, -- set to true by default; this determines whether the filename turns italic if modified
-          show_tabs_only = false, -- this shows only tabs instead of tabs + buffers
-        }
-      }
-      vim.cmd[[
-        set guioptions-=e " Use showtabline in gui vim
-        set sessionoptions+=tabpages,globals " store tabpages and globals in session
-      ]]
-    end,
-    requires = { { 'hoob3rt/lualine.nvim', opt=true }, {'kyazdani42/nvim-web-devicons', opt = true} }
+require "nvim-treesitter.configs".setup {
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false, -- Whether the query persists across vim sessions
+    keybindings = {
+      toggle_query_editor = 'o',
+      toggle_hl_groups = 'i',
+      toggle_injected_languages = 't',
+      toggle_anonymous_nodes = 'a',
+      toggle_language_display = 'I',
+      focus_language = 'f',
+      unfocus_language = 'F',
+      update = 'R',
+      goto_node = '<cr>',
+      show_help = '?',
+    },
   }
+}
 
-  use "terrortylor/nvim-comment"
+-- plugin config end
 
-  use "hyt589/nvim-window"
 
-  use 'tpope/vim-fugitive'
-
-  use 'navarasu/onedark.nvim'
-
-  use 'rafcamlet/coc-nvim-lua'
-
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
-
-  use {"ellisonleao/glow.nvim" }
-
-  use {"tikhomirov/vim-glsl"}
-
-  use "nvim-treesitter/playground"
-
-  use "mhinz/vim-startify"
-
-end)
