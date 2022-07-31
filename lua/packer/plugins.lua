@@ -11,6 +11,8 @@ vim.api.nvim_create_user_command(
 
 return require('packer').startup(function()
 
+    use "kdheepak/lazygit.nvim"
+
  use {
     "ahmedkhalf/project.nvim",
     config = function()
