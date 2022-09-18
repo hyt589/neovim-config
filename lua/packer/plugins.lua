@@ -35,6 +35,11 @@ return require('packer').startup(function()
   }
 
   use {
+      'Shatur/neovim-tasks',
+      requires = {'nvim-lua/plenary.nvim', 'mfussenegger/nvim-dap'}
+  }
+
+  use {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
@@ -60,7 +65,7 @@ return require('packer').startup(function()
     requires = {
       'kyazdani42/nvim-web-devicons', -- optional, for file icon
     },
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    -- tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
 
   use {

@@ -24,7 +24,13 @@ require('onedark').setup {
 require('onedark').load()
 
 require('nvim-tree').setup {
-  view = { width = 50}
+  view = { adaptive_size = true},
+  sync_root_with_cwd = true,
+  respect_buf_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_root = true
+  },
 }
 
 require('lualine').setup {
@@ -63,6 +69,11 @@ require "nvim-treesitter.configs".setup {
       show_help = '?',
     },
   }
+}
+
+require("project_nvim").setup{
+    detection_methods = { "pattern" },
+    patterns = {".git", ".vim", "build"}
 }
 
 -- plugin config end
