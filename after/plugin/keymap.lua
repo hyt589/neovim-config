@@ -59,6 +59,25 @@ local commands = {
         }
     }
 }
+
+local chatgpt_keymap = {
+    name = "+chatgpt",
+    g = { '<cmd>ChatGPT<cr>', 'Open ChatGpt' },
+    G = { '<cmd>ChatGPT<cr>', 'Open ChatGpt' },
+    a = { '<cmd>ChatGPTActAs<cr>', 'Open ChatPgt with prompt' },
+    A = { '<cmd>ChatGPTActAs<cr>', 'Open ChatPgt with prompt' },
+    e = { '<cmd>ChatGPTEditWithInstructions<cr>', 'Edit Code with GPT' },
+    E = { '<cmd>ChatGPTEditWithInstructions<cr>', 'Edit Code with GPT' },
+    r = {
+        e = { '<cmd>ChatGPTRun explain_code<cr>', "Explain Code" },
+        E = { '<cmd>ChatGPTRun explain_code<cr>', "Explain Code" },
+    },
+    R = {
+        e = { '<cmd>ChatGPTRun explain_code<cr>', "Explain Code" },
+        E = { '<cmd>ChatGPTRun explain_code<cr>', "Explain Code" }
+    }
+}
+
 local backslash_keymap = {
     t = { '<cmd>Ttoggle<cr>', 'Toggle the neoterm window' },
     f = { '<cmd>NvimTreeFocus<cr>', 'Toggle nvim tree' },
