@@ -118,6 +118,8 @@ local hop_keymap = {
 wk.register_keymap(' ', space_keymap)
 wk.register_keymap('\\', backslash_keymap)
 wk.register_keymap('H', hop_keymap)
+wk.register_keymap('|', chatgpt_keymap, { mode = 'v' })
+wk.register_keymap('|', chatgpt_keymap, { mode = 'n' })
 
 vim.cmd [[ tnoremap <esc> <c-\><c-n> ]]
 vim.cmd [[ nnoremap <silent>Q <cmd>qa<cr> ]]
