@@ -93,10 +93,31 @@ local backslash_keymap = {
     ['9'] = { '<cmd>buffer 9<cr>', 'open buffer 9' },
     o = { '<cmd>CocCommand clangd.switchSourceHeader<cr>', 'switch header source cpp' },
     [';'] = { '<cmd>CocCommand clangd.inlayHints.toggle<cr>', 'toggle clangd inlayHints' },
-    s = { '<cmd>Vista coc<cr>', 'Show symbol outline' }
+    s = { '<cmd>Vista coc<cr>', 'Show symbol outline' },
+    ['\\'] = {
+        name = "+hop",
+        a = { '<cmd>HopAnywhere<cr>', 'HopAnywhere' },
+        w = { '<cmd>HopWord<cr>', 'HopWord' },
+        ['1'] = { '<cmd>HopChar1<cr>', 'HopChar1' },
+        ['2'] = { '<cmd>HopChar2<cr>', 'HopChar2' }
+    },
 }
+
+local hop_keymap = {
+    name = "+hop",
+    a = { '<cmd>HopAnywhere<cr>', 'HopAnywhere' },
+    A = { '<cmd>HopAnywhere<cr>', 'HopAnywhere' },
+    w = { '<cmd>HopWord<cr>', 'HopWord' },
+    W = { '<cmd>HopWord<cr>', 'HopWord' },
+    ['1'] = { '<cmd>HopChar1<cr>', 'HopChar1' },
+    ['!'] = { '<cmd>HopChar1<cr>', 'HopChar1' },
+    ['@'] = { '<cmd>HopChar2<cr>', 'HopChar2' },
+    ['2'] = { '<cmd>HopChar2<cr>', 'HopChar2' }
+}
+
 wk.register_keymap(' ', space_keymap)
 wk.register_keymap('\\', backslash_keymap)
+wk.register_keymap('H', hop_keymap)
 
 vim.cmd [[ tnoremap <esc> <c-\><c-n> ]]
 vim.cmd [[ nnoremap <silent>Q <cmd>qa<cr> ]]
