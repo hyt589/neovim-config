@@ -1,12 +1,24 @@
 {
-  "Lua.telemetry.enable":false,
-  "rust.show_hover_context": true,
-  "rust-analyzer.enable": true,
-  "sumneko-lua.enableNvimLuaDev": true,
-  "powershell.integratedConsole.showOnStartup": false,
-  "semanticTokens.filetypes": ["*"],
-  "semanticTokens.highlightPriority": 2048,
-  "Lua.workspace.library": ["/root/hyt/nvim-files/squashfs-root/usr/share/nvim/runtime"],
-  "clangd.arguments": ["-header-insertion=never"],
-  "coc.preferences.formatOnSave": true
+    "Lua.telemetry.enable": false,
+    "rust.show_hover_context": true,
+    "rust-analyzer.enable": true,
+    "sumneko-lua.enableNvimLuaDev": true,
+    "powershell.integratedConsole.showOnStartup": false,
+    "semanticTokens.filetypes": [
+        "*"
+    ],
+    "semanticTokens.highlightPriority": 2048,
+    "Lua.workspace.library": [
+        "/home/linuxbrew/.linuxbrew/Cellar/neovim/0.9.5/share/nvim/runtime",
+        "/root/.local/share/nvim/site/pack/packer/start/mini.nvim/lua"
+    ],
+    "clangd.arguments": [
+        "-header-insertion=never"
+    ],
+    "coc.preferences.formatOnSave": true,
+    "comate.enabled": true,
+    "comate.userName": "huangyutong01",
+    "inlayHint.enable": true,
+    "inlayHint.display": true,
+    "inlayHint.enableParameter": true
 }
