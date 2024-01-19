@@ -31,7 +31,7 @@ local space_keymap = {
         w = { '<cmd>lua require("nvim-window").pick()<cr>', 'pick a window' },
         v = { '<cmd>vsplit<cr>', 'split a window vertically' },
         e = { '<cmd>wincmd =<cr>', 'resize windows to even splits' },
-        m = { '<cmd>lua require("maximize").toggle()<cr>', 'toggle window maximize' }
+        m = { '<cmd>lua require("maximize").toggle()<cr>', 'toggle window maximize' },
     },
     g = {
         name = '+git',
