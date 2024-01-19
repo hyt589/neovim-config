@@ -16,15 +16,16 @@ require('onedark').setup {
         bright_orange = "#ff8800", -- define a new color
     },
     highlights = {
-        TSField = { fg = '$red' },
-        TSProperty = { fg = '$red' },
-        TSVariable = { fg = '#fdff94' },
-        TSParameter = { fg = '#3ae0a6' },
-        CocSemVariable = { fg = '#ffffff' },
-        CocSemProperty = { fg = '$red' },
-        CocSemMacro = { fg = '$purple', fmt = 'bold,italic' },
-        CocSemParameter = { fg = '$red', fmt = 'bold' },
-        CocSemTypeParameter = { fg = '$cyan', fmt = 'bold,italic' }
+        TSField             = { fg = '$red' },
+        TSProperty          = { fg = '$red' },
+        TSVariable          = { fg = '#fdff94' },
+        TSParameter         = { fg = '#3ae0a6' },
+        CocSemVariable      = { fg = '#ffffff' },
+        CocSemProperty      = { fg = '$red' },
+        CocSemMacro         = { fg = '$purple', fmt = 'bold,italic' },
+        CocSemParameter     = { fg = '$red', fmt = 'bold' },
+        CocSemTypeParameter = { fg = '$cyan', fmt = 'bold,italic' },
+        CocSemNamespace     = { fg = '#32a852', fmt = 'italic' }
     }
     -- vim.cmd [[highlight cppTSField guifg=#de4747]]
     -- vim.cmd [[highlight cppTSProperty guifg=#de4747]]
@@ -88,5 +89,27 @@ require('glow').setup({
 require('auto-session').setup()
 
 require('hop').setup()
+
+require('neoscroll').setup({
+    easing_function = "quadratic" -- Default easing function
+    -- Set any other options as needed
+})
+
+require('mini.align').setup()
+
+require("chatgpt").setup({
+    api_key_cmd = "cat /root/hyt/openai",
+    openai_params = {
+        model = "gpt-3.5-turbo-16k",
+        frequency_penalty = 0,
+        presence_penalty = 0,
+        max_tokens = 4096,
+        temperature = 0,
+        top_p = 1,
+        n = 1,
+    },
+})
+
+
 
 -- plugin config end
