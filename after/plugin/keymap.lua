@@ -91,11 +91,6 @@ local backslash_keymap = {
     ['7'] = { '<cmd>buffer 7<cr>', 'open buffer 7' },
     ['8'] = { '<cmd>buffer 8<cr>', 'open buffer 8' },
     ['9'] = { '<cmd>buffer 9<cr>', 'open buffer 9' },
-    c = {
-        name = '+cmake options',
-        c = { '<cmd>!' .. commands.win.cmake.generateCompileCommands .. '<cr>', 'generate compile_commands.json' },
-        b = { '<cmd>!cmake -S . -B build && cmake --build build --config Release<cr>', 'build cmake project' }
-    },
     o = { '<cmd>CocCommand clangd.switchSourceHeader<cr>', 'switch header source cpp' },
     [';'] = { '<cmd>CocCommand clangd.inlayHints.toggle<cr>', 'toggle clangd inlayHints' },
     s = { '<cmd>Vista coc<cr>', 'Show symbol outline' }
