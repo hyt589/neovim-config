@@ -19,7 +19,7 @@ return require('packer').startup(function()
                 -- your configuration comes here
                 -- or leave it empty to use the default settings
                 -- refer to the configuration section below
-                patterns = { ".git", "Makefile", "package.json", "CMakeLists.txt" },
+                patterns = { ".git", "Makefile", "package.json", "CMakeLists.txt", "compile_commands.json" },
             }
         end
     }
@@ -142,4 +142,20 @@ return require('packer').startup(function()
             require 'hop'.setup {}
         end
     }
+
+    use 'karb94/neoscroll.nvim'
+
+    use { 'echasnovski/mini.nvim', branch = 'stable' }
+
+    use({
+        "jackMort/ChatGPT.nvim",
+        config = function()
+            require("chatgpt").setup()
+        end,
+        requires = {
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim"
+        }
+    })
 end)
