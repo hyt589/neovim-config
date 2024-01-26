@@ -5,6 +5,7 @@ local configDir = string.sub(thisFile, 1, string.len(thisFile) - 8)
 
 
 local function ChangeRootToConfigDir()
+    vim.cmd("cd " .. configDir)
     local api = require("nvim-tree.api")
     vim.cmd('NvimTreeOpen')
     api.tree.change_root(configDir)

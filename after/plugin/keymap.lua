@@ -1,12 +1,17 @@
-local wk = require('whichkey_setup')
-wk.config {
-    default_keymap_settings = {
-        silent = true,
-        noremap = true,
-    },
-    default_mode = 'n',
-}
-local space_keymap = {
+local Terminal = require('toggleterm.terminal').Terminal
+local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+local bash     = Terminal:new({ cmd = "bash", hidden = true, direction = "float" })
+
+local function _lazygit_toggle()
+    lazygit:toggle()
+end
+
+local function _bash_toggle()
+    bash:toggle()
+end
+
+local wk             = require("which-key")
+local space_keymap   = {
     f = {
         name = '+find',
         f = { '<cmd>Telescope find_files<cr>', 'files' },
@@ -35,7 +40,7 @@ local space_keymap = {
     },
     g = {
         name = '+git',
-        s = { '<cmd>Git<cr>', 'open git window' },
+        s = { _lazygit_toggle, 'open git window' },
         b = { '<cmd>Git blame<cr>', 'show git blame' },
         l = {
             name = '+log',
@@ -50,7 +55,7 @@ local space_keymap = {
         ['2'] = { '<cmd>HopChar2<cr>', 'HopChar2' }
     }
 }
-local commands = {
+local commands       = {
     win = {
         cmake = {
             -- this only works on windows if using msvc build tools
@@ -78,8 +83,9 @@ local chatgpt_keymap = {
     }
 }
 
+
 local backslash_keymap = {
-    t = { '<cmd>Ttoggle<cr>', 'Toggle the neoterm window' },
+    t = { _bash_toggle, 'Toggle the neoterm window' },
     f = { '<cmd>NvimTreeFocus<cr>', 'Toggle nvim tree' },
     w = { '<cmd>lua require("nvim-window").pick()<cr>', 'pick a window' },
     ['1'] = { '<cmd>buffer 1<cr>', 'open buffer 1' },
@@ -115,11 +121,9 @@ local hop_keymap = {
     ['2'] = { '<cmd>HopChar2<cr>', 'HopChar2' }
 }
 
-wk.register_keymap(' ', space_keymap)
-wk.register_keymap('\\', backslash_keymap)
-wk.register_keymap('H', hop_keymap)
-wk.register_keymap('|', chatgpt_keymap, { mode = 'v' })
-wk.register_keymap('|', chatgpt_keymap, { mode = 'n' })
+wk.register(space_keymap, { prefix = " " })
+wk.register(backslash_keymap, { prefix = "\\" })
+-- wk.register( hop_keymap)
 
 vim.cmd [[ tnoremap <esc> <c-\><c-n> ]]
 vim.cmd [[ nnoremap <silent>Q <cmd>qa<cr> ]]

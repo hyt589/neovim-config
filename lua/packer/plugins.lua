@@ -13,15 +13,7 @@ return require('packer').startup(function()
     use "kdheepak/lazygit.nvim"
 
     use {
-        "ahmedkhalf/project.nvim",
-        config = function()
-            require("project_nvim").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-                patterns = { ".git", "Makefile", "package.json", "CMakeLists.txt", "compile_commands.json" },
-            }
-        end
+        "ahmedkhalf/project.nvim"
     }
 
     use 'wbthomason/packer.nvim'
@@ -38,10 +30,23 @@ return require('packer').startup(function()
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
-    use 'liuchengxu/vim-which-key'
+    -- use 'liuchengxu/vim-which-key'
+    -- use {
+    --     'AckslD/nvim-whichkey-setup.lua',
+    --     requires = { 'liuchengxu/vim-which-key' },
+    -- }
+    -- Lua
     use {
-        'AckslD/nvim-whichkey-setup.lua',
-        requires = { 'liuchengxu/vim-which-key' },
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
     }
 
     use {
@@ -52,7 +57,7 @@ return require('packer').startup(function()
         end
     }
 
-    use { 'kassio/neoterm' }
+    use { "akinsho/toggleterm.nvim", tag = '*' }
 
     use {
         'kyazdani42/nvim-tree.lua',

@@ -33,6 +33,15 @@ require('onedark').setup {
 require('onedark').load()
 
 require('nvim-tree').setup {
+    sync_root_with_cwd = true,
+    respect_buf_cwd = true,
+    update_focused_file = {
+        enable = true,
+        update_root = true
+    },
+    filesystem_watchers = {
+        enable = false
+    },
     view = {
         width = table,
         float = {
@@ -110,6 +119,17 @@ require("chatgpt").setup({
     },
 })
 
+require("project_nvim").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+    detection_methods = { "pattern" },
+    patterns = { ">build", ">.vim", ">compile_commands.json" },
+    silent_chdir = false
+}
 
+require('telescope').load_extension('projects')
+
+require("toggleterm").setup {}
 
 -- plugin config end
