@@ -1,12 +1,17 @@
-local wk = require('whichkey_setup')
-wk.config {
-    default_keymap_settings = {
-        silent = true,
-        noremap = true,
-    },
-    default_mode = 'n',
-}
-local space_keymap = {
+local Terminal = require('toggleterm.terminal').Terminal
+local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+local bash     = Terminal:new({ cmd = "bash", hidden = true, direction = "float" })
+
+local function _lazygit_toggle()
+    lazygit:toggle()
+end
+
+local function _bash_toggle()
+    bash:toggle()
+end
+
+local wk             = require("which-key")
+local space_keymap   = {
     f = {
         name = '+find',
         f = { '<cmd>Telescope find_files<cr>', 'files' },
@@ -31,11 +36,11 @@ local space_keymap = {
         w = { '<cmd>lua require("nvim-window").pick()<cr>', 'pick a window' },
         v = { '<cmd>vsplit<cr>', 'split a window vertically' },
         e = { '<cmd>wincmd =<cr>', 'resize windows to even splits' },
-        m = { '<cmd>lua require("maximize").toggle()<cr>', 'toggle window maximize' }
+        m = { '<cmd>lua require("maximize").toggle()<cr>', 'toggle window maximize' },
     },
     g = {
         name = '+git',
-        s = { '<cmd>Git<cr>', 'open git window' },
+        s = { _lazygit_toggle, 'open git window' },
         b = { '<cmd>Git blame<cr>', 'show git blame' },
         l = {
             name = '+log',
@@ -50,7 +55,7 @@ local space_keymap = {
         ['2'] = { '<cmd>HopChar2<cr>', 'HopChar2' }
     }
 }
-local commands = {
+local commands       = {
     win = {
         cmake = {
             -- this only works on windows if using msvc build tools
@@ -59,8 +64,28 @@ local commands = {
         }
     }
 }
+
+local chatgpt_keymap = {
+    name = "+chatgpt",
+    g = { '<cmd>ChatGPT<cr>', 'Open ChatGpt' },
+    G = { '<cmd>ChatGPT<cr>', 'Open ChatGpt' },
+    a = { '<cmd>ChatGPTActAs<cr>', 'Open ChatPgt with prompt' },
+    A = { '<cmd>ChatGPTActAs<cr>', 'Open ChatPgt with prompt' },
+    e = { '<cmd>ChatGPTEditWithInstructions<cr>', 'Edit Code with GPT' },
+    E = { '<cmd>ChatGPTEditWithInstructions<cr>', 'Edit Code with GPT' },
+    r = {
+        e = { '<cmd>ChatGPTRun explain_code<cr>', "Explain Code" },
+        E = { '<cmd>ChatGPTRun explain_code<cr>', "Explain Code" },
+    },
+    R = {
+        e = { '<cmd>ChatGPTRun explain_code<cr>', "Explain Code" },
+        E = { '<cmd>ChatGPTRun explain_code<cr>', "Explain Code" }
+    }
+}
+
+
 local backslash_keymap = {
-    t = { '<cmd>Ttoggle<cr>', 'Toggle the neoterm window' },
+    t = { _bash_toggle, 'Toggle the neoterm window' },
     f = { '<cmd>NvimTreeFocus<cr>', 'Toggle nvim tree' },
     w = { '<cmd>lua require("nvim-window").pick()<cr>', 'pick a window' },
     ['1'] = { '<cmd>buffer 1<cr>', 'open buffer 1' },
@@ -72,17 +97,33 @@ local backslash_keymap = {
     ['7'] = { '<cmd>buffer 7<cr>', 'open buffer 7' },
     ['8'] = { '<cmd>buffer 8<cr>', 'open buffer 8' },
     ['9'] = { '<cmd>buffer 9<cr>', 'open buffer 9' },
-    c = {
-        name = '+cmake options',
-        c = { '<cmd>!' .. commands.win.cmake.generateCompileCommands .. '<cr>', 'generate compile_commands.json' },
-        b = { '<cmd>!cmake -S . -B build && cmake --build build --config Release<cr>', 'build cmake project' }
-    },
     o = { '<cmd>CocCommand clangd.switchSourceHeader<cr>', 'switch header source cpp' },
     [';'] = { '<cmd>CocCommand clangd.inlayHints.toggle<cr>', 'toggle clangd inlayHints' },
-    s = { '<cmd>Vista coc<cr>', 'Show symbol outline' }
+    s = { '<cmd>Vista coc<cr>', 'Show symbol outline' },
+    ['\\'] = {
+        name = "+hop",
+        a = { '<cmd>HopAnywhere<cr>', 'HopAnywhere' },
+        w = { '<cmd>HopWord<cr>', 'HopWord' },
+        ['1'] = { '<cmd>HopChar1<cr>', 'HopChar1' },
+        ['2'] = { '<cmd>HopChar2<cr>', 'HopChar2' }
+    },
 }
-wk.register_keymap(' ', space_keymap)
-wk.register_keymap('\\', backslash_keymap)
+
+local hop_keymap = {
+    name = "+hop",
+    a = { '<cmd>HopAnywhere<cr>', 'HopAnywhere' },
+    A = { '<cmd>HopAnywhere<cr>', 'HopAnywhere' },
+    w = { '<cmd>HopWord<cr>', 'HopWord' },
+    W = { '<cmd>HopWord<cr>', 'HopWord' },
+    ['1'] = { '<cmd>HopChar1<cr>', 'HopChar1' },
+    ['!'] = { '<cmd>HopChar1<cr>', 'HopChar1' },
+    ['@'] = { '<cmd>HopChar2<cr>', 'HopChar2' },
+    ['2'] = { '<cmd>HopChar2<cr>', 'HopChar2' }
+}
+
+wk.register(space_keymap, { prefix = " " })
+wk.register(backslash_keymap, { prefix = "\\" })
+-- wk.register( hop_keymap)
 
 vim.cmd [[ tnoremap <esc> <c-\><c-n> ]]
 vim.cmd [[ nnoremap <silent>Q <cmd>qa<cr> ]]
@@ -95,8 +136,8 @@ vim.cmd [[ vnoremap > >gv ]]
 vim.cmd [[ nnoremap <c-c> "*y ]]
 vim.cmd [[ vnoremap <c-c> "*y ]]
 
-vim.cmd [[ nnoremap <c-d> <c-d>zz]]
-vim.cmd [[ nnoremap <c-u> <c-u>zz]]
+-- vim.cmd [[ nnoremap <c-d> <c-d>zz]]
+-- vim.cmd [[ nnoremap <c-u> <c-u>zz]]
 
-vim.cmd [[ vnoremap <c-d> <c-d>zz]]
-vim.cmd [[ vnoremap <c-u> <c-u>zz]]
+-- vim.cmd [[ vnoremap <c-d> <c-d>zz]]
+-- vim.cmd [[ vnoremap <c-u> <c-u>zz]]

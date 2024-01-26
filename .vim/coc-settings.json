@@ -1,0 +1,12 @@
+{
+    "Lua.runtime.path": [
+        "?.lua",
+        "?/init.lua"
+    ],
+    "Lua.workspace.library": [
+        "~/.local/share/nvim/site/pack/packer/start/",
+        "/home/linuxbrew/.linuxbrew/Cellar/neovim/0.9.5/share/nvim/runtime",
+        "~/.local/share/nvim/site/pack/packer/start/**/lua"
+    ],
+    "Lua.runtime.pathStrict": false
+}
