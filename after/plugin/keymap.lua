@@ -1,6 +1,6 @@
 local Terminal = require('toggleterm.terminal').Terminal
 local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-local bash     = Terminal:new({ cmd = "bash", hidden = true, direction = "float" })
+local bash     = Terminal:new({ cmd = "bash", hidden = true, direction = "float", auto_scroll = false })
 
 local function _lazygit_toggle()
     lazygit:toggle()

@@ -26,6 +26,7 @@ vim.cmd [[ autocmd! BufNewFile,BufRead *.vert,*.frag set ft=glslx ]]
 vim.cmd [[ autocmd! BufNewFile,BufRead CMakeLists* set ft=cmake ]]
 vim.cmd [[ au BufNewFile,BufRead *.xpu set ft=cpp ]]
 vim.cmd [[ set undofile ]] -- enable persistent undo
+vim.cmd [[ set nohlsearch ]]
 
 -- neovide configuration
 if vim.g.neovide then
