@@ -10,10 +10,10 @@
     "semanticTokens.highlightPriority": 2048,
     "Lua.workspace.library": [],
     "clangd.arguments": [
-        "-header-insertion=never"
+        "-header-insertion=never",
     ],
     "coc.preferences.formatOnSave": true,
     "inlayHint.enable": true,
     "inlayHint.display": true,
-    "inlayHint.enableParameter": true
+    "inlayHint.enableParameter": true,
 }

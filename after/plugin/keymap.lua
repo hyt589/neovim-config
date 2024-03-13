@@ -130,6 +130,8 @@ vim.cmd [[ nnoremap <silent>Q <cmd>qa<cr> ]]
 vim.cmd [[ nnoremap <silent><c-s> <cmd>wa!<cr> ]]
 vim.cmd [[ nmap <c-/> gcc]] -- comment line
 vim.cmd [[ vmap <c-/> gc]]  -- comment block
+vim.cmd [[ nmap <c-_> gcc]] -- comment line
+vim.cmd [[ vmap <c-_> gc]]  -- comment block
 vim.cmd [[ vnoremap < <gv ]]
 vim.cmd [[ vnoremap > >gv ]]
 

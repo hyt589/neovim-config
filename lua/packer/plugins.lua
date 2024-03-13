@@ -12,6 +12,8 @@ vim.api.nvim_create_user_command(
 return require('packer').startup(function()
     use "kdheepak/lazygit.nvim"
 
+    use "klen/nvim-config-local"
+
     use {
         "ahmedkhalf/project.nvim"
     }
@@ -115,7 +117,7 @@ return require('packer').startup(function()
 
     use "nvim-treesitter/playground"
 
-    use "mhinz/vim-startify"
+    -- use "mhinz/vim-startify"
 
     -- use {"akinsho/toggleterm.nvim", tag = '*', config = function()
     --   require("toggleterm").setup(){}
@@ -163,4 +165,11 @@ return require('packer').startup(function()
             "nvim-telescope/telescope.nvim"
         }
     })
+
+    use { 'airblade/vim-gitgutter' }
+
+    use {
+        'goolord/alpha-nvim',
+        requires = { 'nvim-tree/nvim-web-devicons' },
+    }
 end)

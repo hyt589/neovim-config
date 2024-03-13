@@ -124,12 +124,29 @@ require("project_nvim").setup {
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
     detection_methods = { "pattern" },
-    patterns = { ">build", ">.vim", ">compile_commands.json" },
-    silent_chdir = false
+    patterns = { "!^build", "!=build", "!^include", ".git", "compile_commands.json", "build/compile_commands.json" },
+    silent_chdir = false,
 }
 
 require('telescope').load_extension('projects')
 
 require("toggleterm").setup {}
+
+require('config-local').setup {
+    -- Default options (optional)
+
+    -- Config file patterns to load (lua supported)
+    config_files = { ".nvim.lua", ".nvimrc", ".exrc" },
+
+    -- Where the plugin keeps files data
+    hashfile = vim.fn.stdpath("data") .. "/config-local",
+
+    autocommands_create = true, -- Create autocommands (VimEnter, DirectoryChanged)
+    commands_create = true,     -- Create commands (ConfigLocalSource, ConfigLocalEdit, ConfigLocalTrust, ConfigLocalIgnore)
+    silent = true,              -- Disable plugin messages (Config loaded/ignored)
+    lookup_parents = false,     -- Lookup config files in parent directories
+}
+
+require 'alpha'.setup(require 'alpha.themes.startify'.config)
 
 -- plugin config end
