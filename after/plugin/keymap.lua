@@ -1,13 +1,44 @@
 local Terminal = require('toggleterm.terminal').Terminal
-local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-local bash     = Terminal:new({ cmd = "bash", hidden = true, direction = "float", auto_scroll = false })
+
+local function OS_TYPE()
+    return {
+        Unknown = 0,
+        Darwin = 1,
+        Linux = 2,
+        Windows = 3,
+    }
+end
+
+local function current_os_type()
+    local sysname = vim.loop.os_uname().sysname
+    if string.match(sysname, "Darwin") then
+        return OS_TYPE().Darwin
+    end
+    if string.match(sysname, "Linux") then
+        return OS_TYPE().Darwin
+    end
+    return OS_TYPE().Unknown
+end
+
+local function get_shell()
+    if current_os_type() == OS_TYPE().Linux then
+        return "bash"
+    end
+    if current_os_type() == OS_TYPE().Darwin then
+        return "zsh"
+    end
+    return "zsh"
+end
+
+local lazygit       = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+local general_shell = Terminal:new({ cmd = get_shell(), hidden = true, direction = "float", auto_scroll = false })
 
 local function _lazygit_toggle()
     lazygit:toggle()
 end
 
-local function _bash_toggle()
-    bash:toggle()
+local function _shell_toggle()
+    general_shell:toggle()
 end
 
 local wk             = require("which-key")
@@ -85,7 +116,7 @@ local chatgpt_keymap = {
 
 
 local backslash_keymap = {
-    t = { _bash_toggle, 'Toggle the neoterm window' },
+    t = { _shell_toggle, 'Toggle the neoterm window' },
     f = { '<cmd>NvimTreeFocus<cr>', 'Toggle nvim tree' },
     w = { '<cmd>lua require("nvim-window").pick()<cr>', 'pick a window' },
     ['1'] = { '<cmd>buffer 1<cr>', 'open buffer 1' },
