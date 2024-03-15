@@ -9,6 +9,7 @@
     ],
     "semanticTokens.highlightPriority": 2048,
     "Lua.workspace.library": [],
+    "Lua.workspace.checkThirdParty": false,
     "clangd.arguments": [
         "-header-insertion=never",
     ],
