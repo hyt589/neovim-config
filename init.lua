@@ -4,7 +4,6 @@ local info = debug.getinfo(1, 'S');
 local thisFile = string.sub(info.source, 2)
 local configDir = string.sub(thisFile, 1, string.len(thisFile) - 8)
 
-
 local function ChangeRootToConfigDir()
     vim.cmd("cd " .. configDir)
     local api = require("nvim-tree.api")
@@ -33,5 +32,6 @@ vim.api.nvim_create_user_command(
     'source ' .. thisFile,
     { bang = true }
 )
+
 
 require('plugins')

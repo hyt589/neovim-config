@@ -1,5 +1,161 @@
--- load plugins
-require('packer.plugins')
+-- ensure lazy.nvim is installed
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
+
+
+local plugins = {
+
+    "kdheepak/lazygit.nvim",
+
+    "klen/nvim-config-local",
+
+    "ahmedkhalf/project.nvim",
+
+    { 'neoclide/coc.nvim',     branch = 'release' },
+
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'kyazdani42/nvim-web-devicons' },
+    },
+
+    {
+        'nvim-telescope/telescope.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        tag = '0.1.6'
+    },
+
+    {
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+                -- refer to the configuration section below
+            }
+        end
+    },
+
+    {
+        'sonph/onehalf',
+        config = function()
+            -- vim.cmd 'colorscheme onehalfdark'
+        end
+    },
+
+    {
+        'akinsho/toggleterm.nvim',
+        version = "*",
+        config = true,
+    },
+
+    {
+        'kyazdani42/nvim-tree.lua',
+        dependencies = {
+            'kyazdani42/nvim-web-devicons', -- optional, for file icon
+        },
+        branch = 'master'                   -- optional, updated every week. (see issue #1193)
+    },
+
+    {
+        'kdheepak/tabline.nvim',
+        config = function()
+            require 'tabline'.setup {
+                -- Defaults configuration options
+                enable = true,
+                options = {
+                    -- If lualine is installed tabline will use separators configured in lualine by default.
+                    -- These options can be used to override those settings.
+                    section_separators = { '', '' },
+                    component_separators = { '', '' },
+                    max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
+                    show_tabs_always = false,    -- this shows tabs only when there are more than one tab or if the first tab is named
+                    show_devicons = true,        -- this shows devicons in buffer section
+                    show_bufnr = true,           -- this appends [bufnr] to buffer section,
+                    show_filename_only = false,  -- shows base filename only instead of relative path in filename
+                    modified_icon = "+ ",        -- change the default modified icon
+                    modified_italic = false,     -- set to true by default; this determines whether the filename turns italic if modified
+                    show_tabs_only = false,      -- this shows only tabs instead of tabs + buffers
+                }
+            }
+            vim.cmd [[
+        set guioptions-=e " Use showtabline in gui vim
+        set sessionoptions+=tabpages,globals " store tabpages and globals in session
+      ]]
+        end,
+        dependencies = { { 'hoob3rt/lualine.nvim', optional = true }, { 'kyazdani42/nvim-web-devicons', optional = true } }
+    },
+
+    "terrortylor/nvim-comment",
+
+    "hyt589/nvim-window",
+
+    'tpope/vim-fugitive',
+
+    'navarasu/onedark.nvim',
+
+    'rafcamlet/coc-nvim-lua',
+
+    'nvim-treesitter/nvim-treesitter',
+
+    { "ellisonleao/glow.nvim", config = function() require("glow").setup() end },
+
+    'liuchengxu/vista.vim',
+
+    {
+        'rmagatti/auto-session',
+        config = function()
+            require("auto-session").setup {
+                log_level = "error",
+                auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+            }
+        end
+    },
+
+    {
+        'phaazon/hop.nvim',
+        branch = 'v2',
+        config = function()
+            require 'hop'.setup {}
+        end
+    },
+
+    'karb94/neoscroll.nvim',
+
+    { 'echasnovski/mini.nvim', branch = 'stable' },
+
+    {
+        "jackMort/ChatGPT.nvim",
+        config = function()
+            require("chatgpt").setup()
+        end,
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim"
+        }
+    },
+
+    { 'airblade/vim-gitgutter' },
+
+    {
+        'goolord/alpha-nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+    },
+}
+
+require("lazy").setup(plugins)
 
 -- plugin config start
 require('coc.config')
