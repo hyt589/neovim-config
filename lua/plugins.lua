@@ -43,7 +43,6 @@ require('nvim-tree').setup {
         enable = false
     },
     view = {
-        width = table,
         float = {
             enable = true,
             -- width = table

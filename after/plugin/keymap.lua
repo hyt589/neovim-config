@@ -17,6 +17,9 @@ local function current_os_type()
     if string.match(sysname, "Linux") then
         return OS_TYPE().Darwin
     end
+    if string.match(sysname, "Windows_NT") then
+        return OS_TYPE().Windows
+    end
     return OS_TYPE().Unknown
 end
 
@@ -26,6 +29,9 @@ local function get_shell()
     end
     if current_os_type() == OS_TYPE().Darwin then
         return "zsh"
+    end
+    if current_os_type() == OS_TYPE().Windows then
+        return "powershell"
     end
     return "zsh"
 end

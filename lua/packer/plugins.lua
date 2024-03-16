@@ -24,12 +24,13 @@ return require('packer').startup(function()
 
     use {
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons' }
+        requires = { 'kyazdani42/nvim-web-devicons' },
     }
 
     use {
         'nvim-telescope/telescope.nvim',
-        requires = { { 'nvim-lua/plenary.nvim' } }
+        requires = { 'nvim-lua/plenary.nvim' },
+        branch = '0.1.5'
     }
 
     -- use 'liuchengxu/vim-which-key'
@@ -66,7 +67,7 @@ return require('packer').startup(function()
         requires = {
             'kyazdani42/nvim-web-devicons', -- optional, for file icon
         },
-        tag = 'nightly'                     -- optional, updated every week. (see issue #1193)
+        branch = 'master'                   -- optional, updated every week. (see issue #1193)
     }
 
     use {
@@ -127,10 +128,10 @@ return require('packer').startup(function()
 
     use 'liuchengxu/vista.vim'
 
-    use {
-        'declancm/maximize.nvim',
-        config = function() require('maximize').setup() end
-    }
+    -- use {
+    --     'declancm/maximize.nvim',
+    --     config = function() require('maximize').setup() end
+    -- }
 
     use {
         'rmagatti/auto-session',
